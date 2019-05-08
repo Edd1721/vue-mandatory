@@ -8,6 +8,8 @@ Simple and easy Vue.js directive for form validation.
 
 ```javascript
   npm install --save vue-mandatory
+
+  yarn add vue-mandatory
 ```
 
 2. Import the library and use it as Vue plugin.
