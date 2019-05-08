@@ -1,0 +1,33 @@
+{
+  "name": "vue-mandatory",
+  "version": "1.0.0",
+  "description": "Simple and easy Vue.js directive for form validation.",
+  "main": "google-oauth.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Edd1721/vue-mandatory.git"
+  },
+  "keywords": [
+    "vue",
+    "vue-form",
+    "vue-validation",
+    "vue-form-validation",
+    "vue-form-validate",
+    "vue-form-required",
+    "vue-validate",
+    "vue-validation",
+    "form",
+    "validation",
+    "form-validation",
+    "required",
+    "validate",
+    "required-input",
+    "required input"
+  ],
+  "author": "Edward S. Ramos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Edd1721/vue-mandatory/issues"
+  },
+  "homepage": "https://github.com/Edd1721/vue-mandatory#readme"
+}
