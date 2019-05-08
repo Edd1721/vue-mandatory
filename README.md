@@ -18,27 +18,7 @@ Simple and easy Vue.js directive for form validation.
   Vue.use(vueMandatory)
   
 ```
-3. You can import it directly in your vue file too.
-
-```javascript
-  <template>...</template>
-  <script>
-  import vueMandatory from 'vue-mandatory'
-
-   export default {
-     ...,
-     name: 'my-component',
-     directives: {
-      vueMandatory
-     },
-     data () {
-       return {}
-     }
-   }
-  </script>
-```
-
-4. Basic usage.
+3. Basic usage.
     * Use the directive **v-mandatory** in your HTML form elements.
     * The directive **v-mandatory** receive an object as value.
     * **Mandatory** each HTML form element must have an id property setted.
