@@ -82,7 +82,6 @@ const isValid = ({ $el, inputClasses, len = 1, pattern }) => {
   if ($el.type === 'checkbox' || $el.type === 'radio') {
     return checkCondition(!$el.checked, { $el, inputClasses })
   }
-  if ($el.type === 'radio') {}
 
   return checkCondition((!value || value.length < len), { $el, inputClasses })
 }
@@ -117,9 +116,16 @@ const validate = {
     params.warningClasses = params.warningClasses || ['mt-3', 'text-red', 'text-xs', 'italic']
 
     $el.addEventListener('blur', onBlurElement.bind(this, params), false)
+
+    setTimeout(function () {
+      const $form = $el.form
+      $form.addEventListener('submit', onBlurElement.bind(this, params), false)
+    }, 1000)
   },
   unbind: function ($el, binding, vnode) {
+    const $form = $el.form
     $el.removeEventListener('blur', onBlurElement, false)
+    $form.removeEventListener('submit', onBlurElement, false)
   }
 }
 
