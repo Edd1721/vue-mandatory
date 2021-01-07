@@ -46,7 +46,7 @@ Simple and easy Vue.js directive for form validation.
       type="text"
       placeholder="jhonDoe"
       v-model="form.username"
-      v-validate="{ msg: 'My custom message here', len: 5, pattern: /[a-zA-Z]{5, 10}/i inputClasses: ['error'], warningClasses: ['background-red', 'text-bold'] }"/>
+      v-mandatory="{ msg: 'My custom message here', len: 5, pattern: /[a-zA-Z]{5, 10}/i inputClasses: ['error'], warningClasses: ['background-red', 'text-bold'] }"/>
   </div>
   <div class="mb-4">
     <label class="block text-grey-darker text-sm font-bold mb-2" for="email">
@@ -58,7 +58,7 @@ Simple and easy Vue.js directive for form validation.
       type="email"
       placeholder="jhon.doe@mail.com"
       v-model="form.email"
-      v-validate="{ msg: validate.email.msg, inputClasses: validate.inputClasses, warningClasses: validate.warningClasses, pattern: validate.email.pattern }" />
+      v-mandatory="{ inputClasses: validate.inputClasses, warningClasses: validate.warningClasses, ...validate.email }" />
   </div>
    <div class="mb-6">
     <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
@@ -70,7 +70,7 @@ Simple and easy Vue.js directive for form validation.
       type="password"
       placeholder="******************"
       v-model="form.password"
-      v-validate="{ msg: validate.password.msg, len: validate.password.len, inputClasses: validate.inputClasses, warningClasses: validate.warningClasses }" />
+      v-mandatory="{inputClasses: validate.inputClasses, warningClasses: validate.warningClasses, ...validate.password}" />
   </div>
   <div class="mb-6">
     <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
@@ -80,7 +80,7 @@ Simple and easy Vue.js directive for form validation.
       class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
       id="gender"
       v-model="form.gender"
-      v-validate>
+      v-mandatory>
         <option value="">Choose one</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
@@ -90,20 +90,15 @@ Simple and easy Vue.js directive for form validation.
    ...
  </template>
  <script>
-   import vueMandatory from 'vue-mandatory'
-
    export default {
      ...,
-     directives: {
-       vueMandatory
-     },
      data () {
        return  {
          validate: {
            email: {
              msg: 'The Email Field is required',
              pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i
-           }
+           },
            password: {
              msg: 'Password is mandatory',
              len: 6
@@ -119,6 +114,47 @@ Simple and easy Vue.js directive for form validation.
      ...
    }
  </script>
+```
+
+4. In case you want to used in a custom component.
+
+```html
+<!-- MyInput.vue -->
+<template>
+  <div class="mb-4">
+    <label class="block text-grey-darker text-sm font-bold mb-2" :for="id">
+      {{ label }}
+    </label>
+    <div class="wrap-input">
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
+        type="email"
+        v-bind="$attrs"
+        v-on="$listeners"
+        @input="event => $emit('input', event.target.value)"
+      />
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    inheritAttrs: false
+  }
+</script>
+```
+
+```html
+<!-- MyForm.vue -->
+<template>
+  <MyInput
+    id="email"
+    placeholder="jhon.doe@mail.com"
+    v-model="form.email"
+    label="Email"
+    v-mandatory="{ inputClasses: validate.inputClasses, warningClasses: validate.warningClasses, ...validate.email }"
+  >
+</template>
 ```
 
 ![](form.png)
