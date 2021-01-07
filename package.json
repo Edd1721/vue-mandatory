@@ -1,8 +1,8 @@
 {
   "name": "vue-mandatory",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple and easy Vue.js directive for form validation.",
-  "main": "google-oauth.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Edd1721/vue-mandatory.git"

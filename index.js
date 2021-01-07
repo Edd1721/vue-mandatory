@@ -106,25 +106,37 @@ const onBlurElement = (params) => {
 
 const validate = {
   bind: function ($el, binding, vnode) {
-    if (!$el.id) {
-      throw new Error(`attribute id is required in ${$el.type} element. On ${vnode.context.$vnode.tag}`)
+    let el = $el
+  
+    if (!$el.type) {
+      el = querySelector('input');    
+    }
+
+    if (!el.id) {
+      throw new Error(`attribute id is required in ${el.type} element. On ${vnode.context.$vnode.tag}`)
     }
 
     const params = binding.value || {}
-    params.$el = $el
+    params.$el = el
     params.inputClasses = params.inputClasses || ['border-red']
     params.warningClasses = params.warningClasses || ['mt-3', 'text-red', 'text-xs', 'italic']
 
-    $el.addEventListener('blur', onBlurElement.bind(this, params), false)
+    el.addEventListener('blur', onBlurElement.bind(this, params), false)
 
     setTimeout(function () {
-      const $form = $el.form
+      const $form = el.form
       $form.addEventListener('submit', onBlurElement.bind(this, params), false)
     }, 1000)
   },
   unbind: function ($el, binding, vnode) {
-    const $form = $el.form
-    $el.removeEventListener('blur', onBlurElement, false)
+    let el = $el
+  
+    if (!$el.type) {
+      el = querySelector('input');    
+    }
+
+    const $form = el.form
+    el.removeEventListener('blur', onBlurElement, false)
     $form.removeEventListener('submit', onBlurElement, false)
   }
 }
