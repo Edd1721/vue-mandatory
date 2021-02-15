@@ -109,7 +109,7 @@ const validate = {
     let el = $el
   
     if (!$el.type) {
-      el = querySelector('input');    
+      el = $el.querySelector('input');    
     }
 
     if (!el.id) {
@@ -132,7 +132,7 @@ const validate = {
     let el = $el
   
     if (!$el.type) {
-      el = querySelector('input');    
+      el = $el.querySelector('input');    
     }
 
     const $form = el.form
